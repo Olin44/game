@@ -1,6 +1,7 @@
 package com.rj.game.auth.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,20 +13,19 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.stereotype.Component;
 
 @EnableMethodSecurity
 @EnableWebSecurity
-@Component
+@Configuration
 class KeycloakSecurityConfig {
 
     @Bean
-    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+    SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new NullAuthenticatedSessionStrategy();
     }
 
     @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+    JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
         grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
@@ -35,12 +35,12 @@ class KeycloakSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 csrf(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/admin/**").hasRole( "admin")
+                                .requestMatchers("/admin/**").hasRole("admin")
                                 .requestMatchers("/maker/**").hasRole("maker")
                                 .requestMatchers("/taker/**").hasRole("taker")
                                 .requestMatchers("/member/**").authenticated()

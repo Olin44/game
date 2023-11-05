@@ -1,7 +1,5 @@
 package com.rj.game.user.create;
 
-import com.rj.game.user.domain.UserId;
-import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -11,7 +9,6 @@ import javax.ws.rs.core.Response;
 import java.util.Collections;
 
 @Service
-@Slf4j
 class KeycloakCreateUserService implements CreateUserService {
     private final KeycloakFacade keycloakFacade;
 

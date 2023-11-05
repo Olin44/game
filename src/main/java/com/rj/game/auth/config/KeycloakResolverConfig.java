@@ -3,16 +3,16 @@ package com.rj.game.auth.config;
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Separate this to avoid cyclic dependency
  */
-@Component
-public class KeycloakResolverConfig {
+@Configuration
+class KeycloakResolverConfig {
 
     @Bean
-    public KeycloakConfigResolver KeycloakConfigResolver() {
+    KeycloakConfigResolver KeycloakConfigResolver() {
         return new KeycloakSpringBootConfigResolver();
     }
 }

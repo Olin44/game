@@ -1,4 +1,4 @@
-package com.rj.game.user.domain;
+package com.rj.game.user.create;
 
 import java.util.UUID;
 

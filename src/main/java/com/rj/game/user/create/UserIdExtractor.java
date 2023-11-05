@@ -1,6 +1,5 @@
 package com.rj.game.user.create;
 
-import com.rj.game.user.domain.UserId;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;

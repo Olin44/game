@@ -4,7 +4,6 @@ import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.UsersResource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
@@ -16,16 +15,13 @@ public class KeycloakFacade {
 
     private final String realm;
 
-    public KeycloakFacade(@Value("${keycloak.auth-server-url}") String serverURL,
-                          @Value("${keycloak.realm}") String realm,
-                          @Value("${keycloak.resource}") String resource,
-                          @Value("${keycloak.credentials.secret}") String clientSecret) {
-        this.realm = realm;
+    public KeycloakFacade(KeycloakProperties keycloakProperties) {
+        this.realm = keycloakProperties.realm();
         this.keycloak = KeycloakBuilder.builder()
-                .realm(realm)
-                .serverUrl(serverURL)
-                .clientId(resource)
-                .clientSecret(clientSecret)
+                .realm(keycloakProperties.realm())
+                .serverUrl(keycloakProperties.authServerUrl())
+                .clientId(keycloakProperties.resource())
+                .clientSecret(keycloakProperties.secret())
                 .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
                 .build();
     }

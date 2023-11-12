@@ -6,7 +6,7 @@ keycloak:
     auth-server-url: http://localhost:18080/auth/
     ssl-required: external
     resource: spring-boot-client
-    secret: 1dd4da9f-286d-4fce-b6a4-c035cc4d5e5b
+    secret: d83f6f17-6cd0-4d10-9953-26bfb75a66ca
     use-resource-role-mappings: true
     bearer-only: true
 
